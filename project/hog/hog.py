@@ -264,13 +264,15 @@ def announce_highest(who, last_score=0, running_high=0):
     assert who == 0 or who == 1, 'The who argument should indicate a player.'
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
-    def help(pre, now=running_high):
+
+    def announce_change(score0, score1):
         nonlocal last_score, running_high
-        if who == 0:
-            ma = running_high - pre
-            print(f"Player {who} has reached a new maximum point gain. {ma} point(s)!")
-        return announce_highest(who)
-    return help
+        cur_score = score0 if who == 0 else score1
+        if (diff := cur_score - last_score) > running_high:
+            print('Player {} has reached a new maximum point gain. {} point(s)!'.format(who, diff))
+            return announce_highest(who, cur_score, diff)
+        return announce_highest(who, cur_score, running_high)
+    return announce_change
     # END PROBLEM 7
 
 
