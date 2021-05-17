@@ -269,7 +269,7 @@ def announce_highest(who, last_score=0, running_high=0):
         nonlocal last_score, running_high
         cur_score = score0 if who == 0 else score1
         diff = cur_score - last_score
-        if diff> running_high:
+        if diff > running_high:
             print('Player {} has reached a new maximum point gain. {} point(s)!'.format(who, diff))
             return announce_highest(who, cur_score, diff)
         return announce_highest(who, cur_score, running_high)
@@ -316,6 +316,14 @@ def make_averaged(original_function, trials_count=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+
+    def average_value(*args):  # *args is the formal parameter of function fn as well
+        total, i = 0, 0
+        while i < trials_count:
+            total, i = total + original_function(*args), i + 1
+        return total / trials_count
+
+    return average_value
     # END PROBLEM 8
 
 
