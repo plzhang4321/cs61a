@@ -268,7 +268,8 @@ def announce_highest(who, last_score=0, running_high=0):
     def announce_change(score0, score1):
         nonlocal last_score, running_high
         cur_score = score0 if who == 0 else score1
-        if (diff := cur_score - last_score) > running_high:
+        diff = cur_score - last_score
+        if diff> running_high:
             print('Player {} has reached a new maximum point gain. {} point(s)!'.format(who, diff))
             return announce_highest(who, cur_score, diff)
         return announce_highest(who, cur_score, running_high)
