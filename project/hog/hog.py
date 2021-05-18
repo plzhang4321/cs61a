@@ -338,6 +338,16 @@ def max_scoring_num_rolls(dice=six_sided, trials_count=1000):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    res = 0
+    time = 0
+    averaged_dice = make_averaged(roll_dice, trials_count)
+    for number in range(1, 11):
+        s = averaged_dice(number, dice)
+        if res >= s:
+            continue
+        res = s
+        time = number
+    return time
     # END PROBLEM 9
 
 
@@ -378,7 +388,7 @@ def piggypoints_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     rolls NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 10
-    return 6  # Replace this statement
+    return 0 if piggy_points(opponent_score) >= cutoff else num_rolls  # Replace this statement
     # END PROBLEM 10
 
 
@@ -388,7 +398,10 @@ def more_boar_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     Otherwise, it rolls NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Replace this statement
+    if more_boar(piggy_points(opponent_score) + score, opponent_score):
+        return 0
+    else:
+        return piggypoints_strategy(score, opponent_score, cutoff, num_rolls)
     # END PROBLEM 11
 
 
